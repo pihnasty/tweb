@@ -10,7 +10,7 @@
 	<application>
 		<locale-config>
 			<default-locale>en</default-locale>
-			<supported-locale>nl</supported-locale>
+			<!--<supported-locale>en</supported-locale>-->
 			<supported-locale>ru</supported-locale>
 		</locale-config>
 		<resource-bundle>
@@ -18,33 +18,33 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
-	<navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>books</from-outcome>
-			<to-view-id>/pages/books.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/pages/books.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>exit</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>books</from-outcome>
-			<to-view-id>/pages/books.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/pages/content.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>books</from-outcome>
-			<to-view-id>/pages/books.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-	</navigation-rule>
+	<!--<navigation-rule>-->
+		<!--<from-view-id>/index.xhtml</from-view-id>-->
+		<!--<navigation-case>-->
+			<!--<from-outcome>books</from-outcome>-->
+			<!--<to-view-id>/pages/books.xhtml</to-view-id>-->
+			<!--<redirect />-->
+		<!--</navigation-case>-->
+	<!--</navigation-rule>-->
+	<!--<navigation-rule>-->
+		<!--<from-view-id>/pages/books.xhtml</from-view-id>-->
+		<!--<navigation-case>-->
+			<!--<from-outcome>exit</from-outcome>-->
+			<!--<to-view-id>/index.xhtml</to-view-id>-->
+			<!--<redirect />-->
+		<!--</navigation-case>-->
+		<!--<navigation-case>-->
+			<!--<from-outcome>books</from-outcome>-->
+			<!--<to-view-id>/pages/books.xhtml</to-view-id>-->
+			<!--<redirect />-->
+		<!--</navigation-case>-->
+	<!--</navigation-rule>-->
+	<!--<navigation-rule>-->
+		<!--<from-view-id>/pages/content.xhtml</from-view-id>-->
+		<!--<navigation-case>-->
+			<!--<from-outcome>books</from-outcome>-->
+			<!--<to-view-id>/pages/books.xhtml</to-view-id>-->
+			<!--<redirect />-->
+		<!--</navigation-case>-->
+	<!--</navigation-rule>-->
 </faces-config>

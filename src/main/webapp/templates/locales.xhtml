@@ -12,15 +12,17 @@
 
             <div class="locales">
                 <h:form>
-   
-                        <h:commandLink action="#{localeChanger.changeLocale('en')}">
-                            <h:graphicImage library="images" name="eng.png" title="#{msg.english}"/>
 
-                        </h:commandLink>
 
-                        <h:commandLink action = "#{localeChanger.changeLocale('ru')}">
-                            <h:graphicImage library="images" name="rus.png" title="#{msg.russian}"/>
-                        </h:commandLink>
+                    <h:commandLink action = "#{locale.changeLocale}"     value="index.xhtml">
+                                <h:graphicImage library="images" name="eng.png" title="${msg.english}"/>
+                    </h:commandLink>
+
+                        <h:outputText value="&nbsp;" />
+
+                    <h:commandLink action = "#{locale.changeLocaleR}"    value="index.xhtml">
+                        <h:graphicImage library="images" name="rus.png" title="${msg.russian}"/>
+                    </h:commandLink>
 
                 </h:form>
             </div>

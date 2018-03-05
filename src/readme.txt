@@ -33,3 +33,15 @@ http://localhost:8080/LearnJavaEE-1.0-SNAPSHOT/calculator.servlets.CheckOperatio
 
 
 http://localhost:8080/LearnJavaEE-1.0-SNAPSHOT/CalcServlet2
+
+
+
+                     <!--<h:commandButton  action = "#{localeChanger.changeLocale('en')}">-->
+                        <!--<h:graphicImage library="images" name="eng.png" title="${msg.english}"/>-->
+                    <!--</h:commandButton>-->
+
+                    <!--<h:outputText value="&nbsp;" />-->
+
+                    <!--<h:commandButton  action = "#{localeChanger.changeLocale('ru')}">-->
+                        <!--<h:graphicImage library="images" name="rus.png" title="${msg.russian}"/>-->
+                    <!--</h:commandButton>-->
