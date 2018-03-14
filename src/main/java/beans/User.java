@@ -1,25 +1,27 @@
 package beans;
 
 import java.io.Serializable;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 
-@ManagedBean
-@SessionScoped
+@Named
+@RequestScoped
 public class User implements Serializable {
 
-    private String username;
+    private String email;
     private String password;
 
     public User() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {

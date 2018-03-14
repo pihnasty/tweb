@@ -2,6 +2,8 @@ package db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.InitialContext;
@@ -17,7 +19,7 @@ public class Database {
     public static Connection getConnection() {
         try {
             ic = new InitialContext();
-            ds = (DataSource) ic.lookup("jdbc/Library");
+            ds = (DataSource) ic.lookup("jdbc/Flow_production");
             if (conn==null) {
                 conn = ds.getConnection();
             }
@@ -27,6 +29,27 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        return conn;
+    }
+
+    public static Connection getConnectionForTest() {
+        try {
+            Hashtable<String,String> environment = new Hashtable<>();
+            environment.put("java.naming.factory.initial","com.sun.enterprise.naming.impl.SerialInitContextFactory");
+            environment.put("java.naming.factory.state","com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
+            environment.put("java.naming.factory.url.pkgs","com.sun.enterprise.naming");
+
+            ic = new InitialContext(environment);
+            ds = (DataSource) ic.lookup("jdbc/Flow_production");
+            if (conn==null) {
+                conn = ds.getConnection();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return conn;
     }
 

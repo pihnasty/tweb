@@ -16,14 +16,14 @@ public class TestConneciton {
 
         try {
             InitialContext ic = new InitialContext();
-            DataSource ds = (DataSource) ic.lookup("jdbc/Library");   //java:comp/env/
+            DataSource ds = (DataSource) ic.lookup("jdbc/Flow_production");   //java:comp/env/
             Connection conn = ds.getConnection();
             Statement stmt = conn.createStatement();
             System.out.println("Hello!");
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM library.book;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM flow_production.login;");
             while (rs.next()) {
-                System.out.println("name="+rs.getString("name"));
+                System.out.println("email="+rs.getString("email"));
             }
 
         } catch (SQLException ex) {
@@ -34,3 +34,6 @@ public class TestConneciton {
 
     }
 }
+
+
+//  http://docs.jboss.org/seam/3/faces/latest/reference/en-US/html/components.html#validateForm

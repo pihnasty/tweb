@@ -10,17 +10,17 @@
     <h:body>
         <ui:composition>
 
-            <div class="locales">
+            <div class="header">
                 <h:form>
 
 
-                    <h:commandLink action = "#{locale.changeLocale}"     value="index.xhtml">
-                                <h:graphicImage library="images" name="eng.png" title="${msg.english}"/>
+                    <h:commandLink action = "#{language.changeLanguage('')}"     value="">
+                        <h:graphicImage library="images" name="eng.png" title="${msg.english}"/>
                     </h:commandLink>
 
-                        <h:outputText value="&nbsp;" />
+                    <h:outputText value="&nbsp;" />
 
-                    <h:commandLink action = "#{locale.changeLocaleR}"    value="index.xhtml">
+                    <h:commandLink action = "#{language.changeLanguage('ru')}"    value="">
                         <h:graphicImage library="images" name="rus.png" title="${msg.russian}"/>
                     </h:commandLink>
 

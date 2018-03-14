@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style_index.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="login_div">
+                <h:form styleClass="login_form">
+                    <h:panelGrid columns="2" columnClasses="rightAlign,leftAlign">
+                        <h:outputLabel for="email" value="#{msg.email}"/>
+                        <h:inputText id="email"
+                                 label="#{msg.email}"
+                                 value="#{user.email}"
+                                 required="true">
+                            <f:validator validatorId="emailValidator" />
+                        </h:inputText>
+                        <h:outputLabel for="password" value="#{msg.password}">  </h:outputLabel>
+                        <h:inputSecret id="password"
+                                 label="#{msg.password}"
+                                 value="#{user.password}"
+                                 required="true">
+                            <f:validator validatorId="passwordValidator" />
+                       </h:inputSecret>
+                    </h:panelGrid>
+                    <h:commandButton action="/templates/confirmation" value="#{msg.LogIn}"/>
+                    <!--<table align="left" width="350">-->
+                        <!--<tr><td align="left">-->
+                            <!--<span style="color:red;">*</span> #{msg.email}</td>-->
+                            <!--<td>-->
+                                <!--<h:inputText id="username" value="#{user.email}" required="true" requiredMessage="#{msg.login_required}">-->
+                                    <!--<f:validator validatorId="validators.LoginValidator"/>-->
+                                    <!--<f:ajax event="keyup" render="loginError"/>-->
+                                <!--</h:inputText></td>-->
+                            <!--<td>-->
+                                <!--<h:commandButton action="pages/books?faces-redirect=true" value="#{msg.entry}" styleClass="login_button" onclick="return checkValue(this.form, '#{msg.login_required}');">-->
+
+                                <!--</h:commandButton>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr><td colspan="3">-->
+                            <!--<p><h:message id="loginError" for="username" styleClass="error"/></p>-->
+                        <!--</td></tr>-->
+                    <!--</table>-->
+                </h:form>
+                <h:messages/>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

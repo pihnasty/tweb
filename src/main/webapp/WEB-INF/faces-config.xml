@@ -10,8 +10,9 @@
 	<application>
 		<locale-config>
 			<default-locale>en</default-locale>
-			<!--<supported-locale>en</supported-locale>-->
+			<supported-locale>en</supported-locale>
 			<supported-locale>ru</supported-locale>
+			<supported-locale>gr</supported-locale>
 		</locale-config>
 		<resource-bundle>
 			<base-name>nls.messages</base-name>
