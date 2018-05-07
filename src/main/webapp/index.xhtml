@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
 <f:view >
     <h:head>
         <title>#{msg.first_page_title}</title>
@@ -27,6 +28,29 @@
         <ui:include src="/templates/login.xhtml"/>
         <div class="titlePage" >#{msg.first_page_title}</div>
         <div class="footer">#{msg.author_info}</div>
+
+
+        <!--<h1>JSF dropdown example</h1>-->
+
+        <!--<h:form>-->
+            <!--<h4>1. With hardcoded values</h4>-->
+            <!--<h:selectOneMenu value="Java">-->
+                <!--<f:selectItem itemValue="1" itemLabel="Java"/>-->
+                <!--<f:selectItem itemValue="2" itemLabel="Scala"/>-->
+                <!--<f:selectItem itemValue="3" itemLabel="Groovy"/>-->
+                <!--<f:selectItem itemValue="4" itemLabel="Ruby"/>-->
+            <!--</h:selectOneMenu>-->
+            <!--<h:selectOneMenu value="Java">-->
+                <!--<f:selectItem itemValue="1" itemLabel="Java"/>-->
+                <!--<f:selectItem itemValue="2" itemLabel="Scala"/>-->
+                <!--<f:selectItem itemValue="3" itemLabel="Groovy"/>-->
+                <!--<f:selectItem itemValue="4" itemLabel="Ruby"/>-->
+            <!--</h:selectOneMenu>-->
+
+
+        <!--</h:form>-->
+
+
     </h:body>
 </f:view>
 </html>

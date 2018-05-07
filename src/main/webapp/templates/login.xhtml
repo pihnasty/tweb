@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough" >
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet library="css" name="style_index.css"  />
@@ -16,18 +17,20 @@
                         <h:inputText id="email"
                                  label="#{msg.email}"
                                  value="#{user.email}"
-                                 required="true">
+                                 required="true"
+                                 p:placeholder="#{msg.email}">
                             <f:validator validatorId="emailValidator" />
                         </h:inputText>
                         <h:outputLabel for="password" value="#{msg.password}">  </h:outputLabel>
                         <h:inputSecret id="password"
                                  label="#{msg.password}"
                                  value="#{user.password}"
-                                 required="true">
+                                 required="true"
+                                 p:placeholder="#{msg.password}">
                             <f:validator validatorId="passwordValidator" />
                        </h:inputSecret>
                     </h:panelGrid>
-                    <h:commandButton action="/templates/confirmation" value="#{msg.LogIn}"/>
+                    <h:commandButton action="/pages/page_main" value="#{msg.LogIn}"/>
                     <!--<table align="left" width="350">-->
                         <!--<tr><td align="left">-->
                             <!--<span style="color:red;">*</span> #{msg.email}</td>-->

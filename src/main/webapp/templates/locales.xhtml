@@ -9,11 +9,8 @@
     </h:head>
     <h:body>
         <ui:composition>
-
             <div class="header">
                 <h:form>
-
-
                     <h:commandLink action = "#{language.changeLanguage('')}"     value="">
                         <h:graphicImage library="images" name="eng.png" title="${msg.english}"/>
                     </h:commandLink>
@@ -23,10 +20,8 @@
                     <h:commandLink action = "#{language.changeLanguage('ru')}"    value="">
                         <h:graphicImage library="images" name="rus.png" title="${msg.russian}"/>
                     </h:commandLink>
-
                 </h:form>
             </div>
-
         </ui:composition>
     </h:body>
 </html>

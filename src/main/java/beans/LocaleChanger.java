@@ -2,12 +2,14 @@ package beans;
 
 import java.io.Serializable;
 import java.util.Locale;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
-@ManagedBean (name="locale")
-@SessionScoped
+@Named ("locale")
+@RequestScoped
 public class LocaleChanger implements Serializable {
 
     private Locale currentLocale ;
