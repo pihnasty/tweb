@@ -31,7 +31,7 @@ public class MenuBean {
         DefaultSubMenu theMenu = new DefaultSubMenu(label);
         for (Object item : items) {
             DefaultMenuItem mi = new DefaultMenuItem(item);
-            mi.setUrl("#");
+            mi.setUrl("https://www.primefaces.org/showcase/ui/menu/menubar.xhtml");
             theMenu.addElement(mi);
         }
         if (parentMenu == null) {
