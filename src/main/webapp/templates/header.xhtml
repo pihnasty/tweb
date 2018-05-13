@@ -13,11 +13,21 @@
     <ui:composition>
         <div class="welcome">
             <ui:include src="/templates/locales.xhtml"/>
-
         </div>
         <h2>PrimeFaces MenuBar Example</h2>
-        <p:menubar model="#{menuBean.menuModel}">
-        </p:menubar>
+        <!--<p:menubar model="#{menuBean.menuModel}">-->
+
+        <!--</p:menubar>-->
+            <p:menubar>
+                <p:submenu label="Списки" >
+                    <p:menuitem value="Клиенты" url="/PdfContent" />
+                    <!--<p:menuitem value="Клиенты" url="/PdfContent" icon="fa fa-group"/>-->
+                    <p:menuitem value="Склады" url="https://www.logicbig.com/tutorials/misc/primefaces/chips.html"/>
+                </p:submenu>
+                <f:facet name="options">
+                    <p:commandButton type="button" icon="fa fa-info"/>
+                </f:facet>
+            </p:menubar>
     </ui:composition>
 
 </h:body>

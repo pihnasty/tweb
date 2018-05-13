@@ -34,6 +34,7 @@ public class MenuBean {
             mi.setUrl("https://www.primefaces.org/showcase/ui/menu/menubar.xhtml");
             theMenu.addElement(mi);
         }
+
         if (parentMenu == null) {
             model.addElement(theMenu);
         } else {
