@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+<f:view >
+    <h:head>
+        <title>#{msg.first_page_title}</title>
+        <h:outputStylesheet library="css" name="style_index.css"  />
+        <h:outputScript library="js" name="library.js" target="head"/>
+        <h:outputScript library="javax.faces" name="jsf.js"/>
+    </h:head>
+    <h:body>
+        <noscript>
+            <!--<h4><p>Включите JavaScript в вашем браузере, чтобы работать с нашим приложением</p></h4>-->
+
+
+            <!--<style type="text/css">-->
+                <!--.main { display:none; }-->
+                <!--p { text-align: center; }-->
+            <!--</style>-->
+
+        </noscript>
+        <div class="welcome">
+            <ui:include src="/templates/locales.xhtml"/>
+        </div>
+        <!--<ui:include src="/templates/header.xhtml"/>-->
+        <ui:include src="/templates/login.xhtml"/>
+        <div class="titlePage" >#{msg.first_page_title}</div>
+        <div class="footer">#{msg.author_info}</div>
+
+    </h:body>
+</f:view>
+</html>
+

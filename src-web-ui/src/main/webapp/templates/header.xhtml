@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Facelet Title</title>
+    <h:outputStylesheet library="css" name="style_main.css"  />
+</h:head>
+<h:body>
+    <ui:composition>
+        <div class="welcome">
+            <ui:include src="/templates/locales.xhtml"/>
+        </div>
+        <h2>PrimeFaces MenuBar Example</h2>
+        <p:menubar model="#{menuBean.menuModel}">
+
+        </p:menubar>
+        <p:menubar>
+        <p:submenu label="File" icon="ui-icon-document">
+            <p:submenu label="New" icon="ui-icon-contact">
+                <p:menuitem value="Project" url="#" />
+                <p:menuitem value="Other" url="#" />
+            </p:submenu>
+            <p:menuitem value="Open" url="#" />
+            <p:separator />
+            <p:menuitem value="Quit" url="#" />
+        </p:submenu>
+            <f:facet name="options">
+                <p:inputText style="margin-right:10px" placeholder="Search"/>
+                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+            </f:facet>
+        </p:menubar>
+
+
+
+        <p:menubar>
+            <p:submenu label="File" icon="ui-icon-document">
+                <p:submenu label="New" icon="ui-icon-contact">
+                    <p:menuitem value="Project" url="#" />
+                    <p:menuitem value="Other" url="#" />
+                </p:submenu>
+                <p:menuitem value="Open" url="#" />
+                <p:separator />
+                <p:menuitem value="Quit" url="#" />
+            </p:submenu>
+            <f:facet name="options">
+                <p:inputText style="margin-right:10px" placeholder="Search"/>
+                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+            </f:facet>
+        </p:menubar>
+        <!--https://www.primefaces.org/showcase/ui/menu/menubar.xhtml-->
+            <!--<p:menubar>-->
+                <!--<p:submenu label="Списки" >-->
+                    <!--<p:menuitem value="Клиенты" url="/PdfContent" />-->
+                    <!--&lt;!&ndash;<p:menuitem value="Клиенты" url="/PdfContent" icon="fa fa-group"/>&ndash;&gt;-->
+                    <!--<p:menuitem value="Склады" url="https://www.logicbig.com/tutorials/misc/primefaces/chips.html"/>-->
+                <!--</p:submenu>-->
+                <!--<f:facet name="options">-->
+                    <!--<p:commandButton type="button" icon="fa fa-info"/>-->
+                <!--</f:facet>-->
+            <!--</p:menubar>-->
+
+        <!-- -->
+    </ui:composition>
+
+</h:body>
+</html>
+

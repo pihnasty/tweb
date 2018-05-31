@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough" >
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style_index.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="login_div">
+                <h:form styleClass="login_form">
+                    <h:panelGrid columns="2" columnClasses="rightAlign,leftAlign">
+                        <h:outputLabel for="email" value="#{msg.email}"/>
+                        <h:inputText id="email"
+                                 label="#{msg.email}"
+                                 value="#{user.email}"
+                                 required="true"
+                                 p:placeholder="#{msg.email}">
+                            <f:validator validatorId="emailValidator" />
+                        </h:inputText>
+                        <h:outputLabel for="password" value="#{msg.password}">  </h:outputLabel>
+                        <h:inputSecret id="password"
+                                 label="#{msg.password}"
+                                 value="#{user.password}"
+                                 required="true"
+                                 p:placeholder="#{msg.password}">
+                            <f:validator validatorId="passwordValidator" />
+                       </h:inputSecret>
+                    </h:panelGrid>
+                    <h:commandButton action="/pages/page_main" value="#{msg.LogIn}"/>
+                </h:form>
+                <h:messages/>
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+
