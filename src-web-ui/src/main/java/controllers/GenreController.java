@@ -24,27 +24,37 @@ public class GenreController implements Serializable {
     }
 
     private void fillGenresAll() {
-        Statement stmt = null;
-        ResultSet rs = null;
-        Connection conn = null;
-
         genreList = new ArrayList<Genre>();
+//        Statement stmt = null;
+//        ResultSet rs = null;
+//        Connection conn = null;
+//
 
-        try {
-            conn = Database.getConnection();
+//
+//        try {
+//            conn = Database.getConnection();
+//
+//            stmt = conn.createStatement();
+//            rs = stmt.executeQuery("select * from flow_production.login order by email");
+//            while (rs.next()) {
+//                Genre genre = new Genre();
+//                genre.setName(rs.getString("email"));
+//                genre.setId(rs.getLong("id"));
+//                genreList.add(genre);
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(GenreController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("select * from flow_production.login order by email");
-            while (rs.next()) {
-                Genre genre = new Genre();
-                genre.setName(rs.getString("email"));
-                genre.setId(rs.getLong("id"));
-                genreList.add(genre);
-            }
+// -------------------------------------------------------------------------
+      Genre genre = new Genre();
+        genre.setName("diplom@bk.ru");
+        genre.setId(1);
+        genreList.add(genre);
+// -------------------------------------------------------------------------
 
-        } catch (SQLException ex) {
-            Logger.getLogger(GenreController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
 //        finally {
 //            try {
 //                if (stmt != null) {

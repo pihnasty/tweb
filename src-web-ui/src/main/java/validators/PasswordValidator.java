@@ -38,15 +38,19 @@ public class PasswordValidator implements Validator {
         }
     }
 
+//    public boolean isPasswordFromDataBase(String email, String password) throws SQLException {
+//        Connection connection = Database.getConnection();  //getConnectionForTest()
+//        PreparedStatement preparedStatement =  connection.prepareStatement("select email, password from flow_production.login where email= ?");
+//        preparedStatement.setString(1,email);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        resultSet.next();
+//        if (password.equals(resultSet.getString("password"))) {
+//            return true;
+//        }
+//        return false;
+//    }
+
     public boolean isPasswordFromDataBase(String email, String password) throws SQLException {
-        Connection connection = Database.getConnection();  //getConnectionForTest()
-        PreparedStatement preparedStatement =  connection.prepareStatement("select email, password from flow_production.login where email= ?");
-        preparedStatement.setString(1,email);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        if (password.equals(resultSet.getString("password"))) {
-            return true;
-        }
-        return false;
+        return true;
     }
 }
