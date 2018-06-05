@@ -8,8 +8,8 @@
     <artifactId>tweb</artifactId>
     <version>1.0</version>
     <modules>
-        <module>src-logger</module>
         <module>src-web-ui</module>
+        <module>src-logger</module>
     </modules>
 
     <packaging>pom</packaging>

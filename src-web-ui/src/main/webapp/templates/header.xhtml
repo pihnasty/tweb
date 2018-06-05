@@ -14,43 +14,72 @@
         <div class="welcome">
             <ui:include src="/templates/locales.xhtml"/>
         </div>
-        <h2>PrimeFaces MenuBar Example</h2>
-        <p:menubar model="#{menuBean.menuModel}">
+        <!--<h2>PrimeFaces MenuBar Example</h2>-->
+        <!--<p:menubar model="#{menuBean.menuModel}">-->
 
-        </p:menubar>
-        <p:menubar>
-        <p:submenu label="File" icon="ui-icon-document">
-            <p:submenu label="New" icon="ui-icon-contact">
-                <p:menuitem value="Project" url="#" />
-                <p:menuitem value="Other" url="#" />
-            </p:submenu>
-            <p:menuitem value="Open" url="#" />
-            <p:separator />
-            <p:menuitem value="Quit" url="#" />
-        </p:submenu>
-            <f:facet name="options">
-                <p:inputText style="margin-right:10px" placeholder="Search"/>
-                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-            </f:facet>
-        </p:menubar>
+        <!--</p:menubar>-->
+        <!--<p:menubar>-->
+        <!--<p:submenu label="File" icon="ui-icon-document">-->
+            <!--<p:submenu label="New" icon="ui-icon-contact">-->
+                <!--<p:menuitem value="Project" url="#" />-->
+                <!--<p:menuitem value="Other" url="#" />-->
+            <!--</p:submenu>-->
+            <!--<p:menuitem value="Open" url="#" />-->
+            <!--<p:separator />-->
+            <!--<p:menuitem value="Quit" url="#" />-->
+        <!--</p:submenu>-->
+            <!--<f:facet name="options">-->
+                <!--<p:inputText style="margin-right:10px" placeholder="Search"/>-->
+                <!--<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />-->
+            <!--</f:facet>-->
+        <!--</p:menubar>-->
 
 
 
-        <p:menubar>
-            <p:submenu label="File" icon="ui-icon-document">
-                <p:submenu label="New" icon="ui-icon-contact">
-                    <p:menuitem value="Project" url="#" />
-                    <p:menuitem value="Other" url="#" />
+
+        <div class="titlePage">
+            <p:menubar>
+                <p:submenu label="File" icon="ui-icon-document">
+                    <p:submenu label="New" icon="ui-icon-contact">
+                        <p:menuitem value="Project" url="#"/>
+                        <p:menuitem value="Other" url="#"/>
+                    </p:submenu>
+                    <p:menuitem value="Open" url="#"/>
+                    <p:separator/>
+                    <p:menuitem value="Quit" url="#"/>
                 </p:submenu>
-                <p:menuitem value="Open" url="#" />
-                <p:separator />
-                <p:menuitem value="Quit" url="#" />
-            </p:submenu>
-            <f:facet name="options">
-                <p:inputText style="margin-right:10px" placeholder="Search"/>
-                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-            </f:facet>
-        </p:menubar>
+
+                <p:submenu label="Projects" icon="ui-icon-document">
+                    <p:submenu label="Magistral Belt Conveyor" icon="ui-icon-contact">
+                        <p:menuitem value="Overview" url="/pages/magistral_belt_conveyor.xhtml"/>
+                        <p:menuitem value="Models" url="#"/>
+                        <p:menuitem value="Control systems" url="#"/>
+                        <p:menuitem value="Simulation model" url="#"/>
+                    </p:submenu>
+                    <p:separator/>
+                    <p:submenu label="Composite Belt Conveyor" icon="ui-icon-contact">
+                        <p:menuitem value="Overview" url="/pages/composite_belt_conveyor.xhtml"/>
+                        <p:menuitem value="Models" url="#"/>
+                        <p:menuitem value="Control systems" url="#"/>
+                        <p:menuitem value="Simulation model" url="#"/>
+                    </p:submenu>
+                </p:submenu>
+
+
+                <p:submenu label="Settings" icon="ui-icon-document">
+                    <p:submenu label="Project settings" icon="ui-icon-contact">
+                    </p:submenu>
+                </p:submenu>
+                <f:facet name="options">
+                    <p:inputText style="margin-right:10px" placeholder="Search"/>
+                    <p:commandButton type="button" value="Logout" icon="ui-icon-extlink"/>
+                </f:facet>
+            </p:menubar>
+        </div>
+
+
+
+
         <!--https://www.primefaces.org/showcase/ui/menu/menubar.xhtml-->
             <!--<p:menubar>-->
                 <!--<p:submenu label="Списки" >-->
