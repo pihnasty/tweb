@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Models</title>
+    <h1 align = "center"> Models </h1>
+
+    <style type="text/css">
+        h1 {
+            color: white;
+        }
+        h2 {
+            color: white;
+        }
+        body{
+            background: url("Dpics/1.jpg") no-repeat fixed;
+            background-size: 100%;
+        }
+        div {
+            background-color: #4284D3;
+            color: white;
+            padding: 1%;
+            font-size: 17px;
+        }
+        .pct {
+            margin: 1%;
+            width: 22%;
+        }
+
+        .pkt {
+            margin: 1%;
+            width: 45%;
+        }
+
+    </style>
+
+</h:head>
+
+<h:body>
+
+    <div align="center">
+        Increasing the productivity of coal mining raises the requirements for all technological
+        processes of the mining enterprise. One of the most urgent tasks is to ensure
+        the uninterrupted operation of the underground system, including the conveyor.
+        Modern underground conveyor lines are characterized by considerable length and branching
+        of transport highways, which over time change their parameters: length, topology, etc.
+        For mine conveyor lines, the support at the entrance of the control object (the discrete
+        nature of the load traffic and their variable intensity in the periods of continuous
+        revenues), the internal divisions of the control object (emergency and emergency arresters
+        of the line conveyors), perturbations at the output of the control object, connected with
+        the limited carrying capacity of related transport links (receiving bunker, rail transport,
+        cargo lift) or violation of their normal mode of operation.
+    </div>
+
+    <h2>Model of process of transportation of mining mass by a district conveyor.</h2>
+
+    <div align="justify">
+        The mathematical model of the district belt conveyor must be represented in the form
+        of a ratio linking the output cargo Quk entering the bunker, with the input cargo
+        stream Qk, which is formed by the cleaning combine, and the velocity of the belt vuk.
+        In developing the model, the results of research, presented in the works were used.
+        In particular, it has been shown that the traffic flow rate, coming from the strip
+        of the district conveyor and entering the storage hopper.
+    </div>
+
+
+    <div align="center">
+
+        <a href="http://ea.donntu.org:8080/jspui/bitstream/123456789/6022/1/13.pdf">
+            <img class = "pct" src="Dpics/5.png" alt="Math model"/>
+        </a>
+
+
+    </div>
+
+    <h2>Algorithm</h2>
+
+    <div align="justify">
+        The transport delay T, is the magnitude of the variable, which depends on
+        the velocity vuk. Knowledge of this value is necessary for determining the output flow
+        of Quk conveyor. The method of determining this value for the conditions of the variable
+        speed conveyor consists in numerical integration and control of the distance passing
+        through the cargo.
+        A block diagram of an algorithm that implements the procedure for finding the value
+        of the transport delay T and the velocity value vuk (t-T) according to the method.
+
+    </div>
+
+    <div align="justify">
+        In block 2, the current value of the conveyor speed Vn is input. The resulting speed
+        value is used to increase the current value of the path traveled by the cargo
+        fragment (block 3). In addition, the value of the integration step increases
+        the current value of the transport delay (block 4). The path passed by each of
+        the fragments of the cargo on the tape can not exceed the length of the conveyor.
+        This condition is controlled in block 5. While the condition is not fulfilled, cyclic
+        calculations are made, which include reducing the distance traveled by deducting from
+        it the intervals corresponding to the moment of arrival of the fragment of cargo loaded
+        onto the tape (block 6). Simultaneously with the corresponding number of integration
+        steps, the transport delay (block 7) decreases and the value of the index increases
+        corresponding to the moment when the fragment of the cargo arrives on the tape (block 8).
+    </div>
+
+    <div align = "center">
+
+
+
+        <a href="http://ea.dgtu.donetsk.ua:8080/bitstream/123456789/23419/1/201_2.pdf ">
+            <img class = "pkt" src="Dpics/6.png" alt="Algorithm"/>
+        </a>
+
+    </div>
+
+
+</h:body>
+
+</html>
+

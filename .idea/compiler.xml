@@ -13,7 +13,6 @@
     <bytecodeTargetLevel>
       <module name="m5" target="1.8" />
       <module name="src-logger" target="1.8" />
-      <module name="src-ui-web" target="1.8" />
       <module name="src-web-ui" target="1.8" />
       <module name="tweb" target="1.8" />
     </bytecodeTargetLevel>

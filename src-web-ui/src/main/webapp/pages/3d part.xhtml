@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Control Systems</title>
+    <h1 align = "center"> Control Systems </h1>
+
+    <style type="text/css">
+        h1 {
+            color: white;
+        }
+        h2 {
+            color: white;
+        }
+        body{
+            background: url("Dpics/1.jpg") no-repeat fixed;
+            background-size: 100%;
+        }
+
+        div {
+            background-color: #4284D3;
+            color: white;
+            padding: 1%;
+            font-size: 17px;
+        }
+
+        .pct {
+            margin: 1%;
+            width: 30%;
+        }
+
+
+    </style>
+
+</h:head>
+
+<h:body>
+
+    <h2>The results of simulation</h2>
+
+    <div align="justify">
+        As a result of the analysis of the work of the district transport system, a new way of automatic control
+        of the conveyor line with intermediate bunkers is developed, which consists in regulating the operation
+        of the system elements depending on the current state of the system. Below is a description of the possible
+        states of the transport system and the reactions of its elements in these situations.
+        1 Normal operation of the plot. The combine works with nominal feed rate and performance, the conveyor also
+        operates at nominal speed, the bunker operates in transit mode.
+        2 Emergency mode (accident at the trunk conveyor and its stop). In this case, it is possible to increase
+        the work cycle of the site at the time of filling the hopper. With the help of the coordinating device,
+        the hopper is transferred to the accumulating mode, the feed speed of the combine is reduced and, accordingly,
+        the productivity, the speed of the conveyor is also reduced. The work continues until the bunker fills
+        in completely.
+        3 Overflow mode. After filling the hopper, the coordinating device turns off the combine, turns off the loaded
+        conveyor. The system is in this state until the failure of the main conveyor has been restored.
+        4 Post-accident mode of operation of the site. The inclusion of a main conveyor allows the bunker to open
+        for the delivery of cargo. Also, a local belt conveyor and harvester are included at the same time
+        at a reduced speed. The plot works at these speeds until the empty hopper is empty. The district conveyor
+        and the combine are then converted to a nominal speed.
+    </div>
+
+    <div align="center">
+
+        <a href="https://answers.ros.org/question/52746/manipulating-position-of-conveyor-belt-relative-to-platform-in-gazebo-and-applying-body-wrench/ " target="_blanc">
+            <img class="pct"  src="Dpics/7.png" alt="The results of simulation"/>
+        </a>
+
+    </div>
+
+    <h2>The results of simulation</h2>
+
+    <div align="justify">
+        The results of simulation of the state of the pollutant transport system (v - the speed of the combine,
+        the z-position of the combine relative to the start of slaughter, Q1 - the productivity of the combine,
+        Q2 - the productivity of the district belt conveyor, Н - the material level in the bunker).
+    </div>
+
+
+    <div align="center">
+        <a href="https:/answers.ros.org/question/52746/manipulating-position-of-conveyor-belt-relative-to-platform-in-gazebo-and-applying-body-wrench/" target="_blanc">
+            <img class="pct" src="Dpics/8.png" alt="The results of simulation"/>
+        </a>
+
+    </div>
+
+</h:body>
+</html>
