@@ -10,6 +10,8 @@
     <modules>
         <module>src-web-ui</module>
         <module>src-logger</module>
+        <module>src-math</module>
+        <module>src-conveyor</module>
     </modules>
 
     <packaging>pom</packaging>

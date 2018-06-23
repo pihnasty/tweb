@@ -6,13 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="src-conveyor" />
         <module name="src-logger" />
+        <module name="src-math" />
         <module name="src-web-ui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="m5" target="1.8" />
+      <module name="src-conveyor" target="1.8" />
       <module name="src-logger" target="1.8" />
+      <module name="src-math" target="1.8" />
       <module name="src-web-ui" target="1.8" />
       <module name="tweb" target="1.8" />
     </bytecodeTargetLevel>

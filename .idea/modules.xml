@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/src-conveyor/src-conveyor.iml" filepath="$PROJECT_DIR$/src-conveyor/src-conveyor.iml" />
       <module fileurl="file://$PROJECT_DIR$/src-logger/src-logger.iml" filepath="$PROJECT_DIR$/src-logger/src-logger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src-math/src-math.iml" filepath="$PROJECT_DIR$/src-math/src-math.iml" />
       <module fileurl="file://$PROJECT_DIR$/src-web-ui/src-web-ui.iml" filepath="$PROJECT_DIR$/src-web-ui/src-web-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tweb.iml" filepath="$PROJECT_DIR$/.idea/tweb.iml" />
     </modules>
