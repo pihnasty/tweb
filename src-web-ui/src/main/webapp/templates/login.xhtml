@@ -30,7 +30,7 @@
                             <f:validator validatorId="passwordValidator" />
                        </h:inputSecret>
                     </h:panelGrid>
-                    <h:commandButton action="/pages/page_main" value="#{msg.LogIn}"/>
+                    <h:commandButton action="/pages/page_main?faces-redirect=true" value="#{msg.LogIn}" />
                 </h:form>
                 <h:messages/>
             </div>

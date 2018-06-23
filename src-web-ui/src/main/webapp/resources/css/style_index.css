@@ -1,3 +1,9 @@
+.locales_index{
+    text-align: right;
+    float:right;
+}
+
+
 body {
     font-family: Verdana, Geneva, sans-serif;
     font-size: 24px;
