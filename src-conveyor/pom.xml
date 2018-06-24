@@ -17,6 +17,18 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.techno</groupId>
+            <artifactId>src-math</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.techno</groupId>
+            <artifactId>src-io</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
 

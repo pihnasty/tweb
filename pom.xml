@@ -12,6 +12,7 @@
         <module>src-logger</module>
         <module>src-math</module>
         <module>src-conveyor</module>
+        <module>src-io</module>
     </modules>
 
     <packaging>pom</packaging>
