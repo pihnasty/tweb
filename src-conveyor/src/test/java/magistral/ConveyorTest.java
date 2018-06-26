@@ -33,16 +33,18 @@ public class ConveyorTest {
 
         List<Double> ksis = new ArrayList<>();
         List<Double> gs = new ArrayList<>();
+        List<Double> number = new ArrayList<>();
 
         Integer N = 100;
         double dksi = 1.0/N;
         for( int i =0; i<N; i++) {
             System.out.println(i * dksi+"   "+ conveyor.getSpeed(0.0, i * dksi));
             ksis.add(i * dksi); gs.add(conveyor.getSpeed(0.0, i * dksi));
+            number.add(i*2.0);
         }
 
-        PrintWriterP printWriterP = new PrintWriterP("%8.3f", "D:", "shag2.dat");
-        printWriterP.writeToFile(ksis,gs);
+        PrintWriterP printWriterP = new PrintWriterP("  %8.3f   ", "D:", "test3.txt");
+        printWriterP.writeToFile(number,ksis,gs);
 
 
 

@@ -11,7 +11,7 @@ public class PrintWriterTest {
     public void writeToFileTest() {
 
 
-        PrintWriterP printWriterP = new PrintWriterP("%8.3f ", "D:", "shag2.csv");
+        PrintWriterP printWriterP = new PrintWriterP("%8.3f ", "D:", "shag22.csv");
 
         printWriterP.writeToFile();
 
