@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class AbstractWriterP implements WriterP {
     private String  path;
@@ -11,12 +12,14 @@ public abstract class AbstractWriterP implements WriterP {
     private String columnsFormat = "%8.3f  ";
     private char delimiter;
     private List<String> headerList = new ArrayList<>();
+    private Locale localeCurrent;
 
     public AbstractWriterP(String columnsFormat, char delimiter, String  path, String fileName) {
         this.columnsFormat = columnsFormat;
         this.path = path;
         this.fileName = fileName;
         this.delimiter = delimiter;
+        this.localeCurrent = Locale.getDefault();
     }
 
     @Override
@@ -50,5 +53,9 @@ public abstract class AbstractWriterP implements WriterP {
 
     public List<String> getHeaderList() {
         return headerList;
+    }
+
+    public Locale getLocaleCurrent() {
+        return localeCurrent;
     }
 }

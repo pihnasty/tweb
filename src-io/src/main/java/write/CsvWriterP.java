@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * http://zetcode.com/articles/opencsv/
@@ -23,7 +24,9 @@ public class CsvWriterP extends AbstractWriterP {
         };
 
         p.setHeader("   ksi    ","  gm      ");
+        Locale.setDefault(new Locale("en", "US"));
         p.writeToFile(list1,list2);
+        Locale.setDefault(new Locale("ru", "RU"));
 
     }
 

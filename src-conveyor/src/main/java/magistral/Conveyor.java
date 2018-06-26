@@ -30,9 +30,9 @@ public class Conveyor {
         Conveyor conveyor = new Conveyor();
         conveyor.add(new Section("0", 0.00 , tau -> 0.0 ,  new Bunker(tau -> 1.0, true)))
                 .add(new Section("1", 0.35 , tau -> 1.75,  new Bunker(tau -> 1.1, true)))
-                .add(new Section("2", 0.40 , tau -> 0.25,  new Bunker(tau -> 1.2, true)))
+                .add(new Section("2", 0.40 , tau -> 0.5,  new Bunker(tau -> 1.2, true)))
                 .add(new Section("3", 0.70 , tau -> 1.50,  new Bunker(tau -> 1.3, true)))
-                .add(new Section("4", 0.80 , tau -> 1.33,  new Bunker(tau -> 1.4, true)))
+                .add(new Section("4", 0.80 , tau -> 0.5,  new Bunker(tau -> 1.4, true)))
                 .add(new Section("5", 1.00 , tau -> 2.00,  new Bunker(tau -> 1.5, true)));
 
         for (int i=1; i< conveyor.sections.size(); i++) {
