@@ -1,15 +1,14 @@
 package magistral;
 
-import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 
-public class Section  {
+public class Section implements entity.Section {
     private Double position;
     private ToDoubleFunction speed;
     private Bunker bunker;
+    private ToDoubleFunction boundaryСonditions;
     private String name;
 
     private List<Section> childNodes = new ArrayList<>();
@@ -22,6 +21,13 @@ public class Section  {
         this.name = name;
     }
 
+    public Section(String name, Double position, ToDoubleFunction speed, ToDoubleFunction boundaryСonditions, Bunker bunker) {
+        this.position = position;
+        this.speed = speed;
+        this.bunker = bunker;
+        this.boundaryСonditions = boundaryСonditions;
+        this.name = name;
+    }
     public Section(String name, Double position, ToDoubleFunction speed, Bunker bunker,  List<Section> childNodes, List<Section> parentNodes) {
         this.position = position;
         this.speed = speed;
@@ -57,11 +63,28 @@ public class Section  {
         return name;
     }
 
-    public Double getPosition() {
+    @Override
+    public double getPosition() {
         return position;
     }
 
     public ToDoubleFunction getSpeed() {
         return speed;
+    }
+
+    public ToDoubleFunction getBoundaryСonditions() {
+        return boundaryСonditions;
+    }
+
+    public void setBoundaryСonditions(ToDoubleFunction boundaryСonditions) {
+        this.boundaryСonditions = boundaryСonditions;
+    }
+
+    public Bunker getBunker() {
+        return bunker;
+    }
+
+    public void setBunker(Bunker bunker) {
+        this.bunker = bunker;
     }
 }

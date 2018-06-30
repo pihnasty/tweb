@@ -8,8 +8,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.ToDoubleFunction;
+
+import static org.junit.Assert.assertEquals;
 
 public class ConveyorTest {
+
+//------------------------------------------------------------------------------------------
+    Integer N = 1000;
+    double dksi = 1.0/ N;
+//------------------------------------------------------------------------------------------
+
     Conveyor conveyor = Conveyor.getDefaultConveyor();
     @Test
     public void getDefaultConveyorTest(){
@@ -99,6 +108,142 @@ public class ConveyorTest {
         p.writeToFile(ksis,taus,number );
         p.getLocaleCurrent();
     }
-}
+
+    @Test
+    public void  get_Ksi_From_Tau_02_WriteToFileCsvTest() throws IOException {
+
+        List<Double> ksis = new ArrayList<>();
+        List<Double> number = new ArrayList<>();
+        List<Double> taus = new ArrayList<>();
+        Integer N = 1000;
+
+        double ksi = 0.0;
+        double tauMin = 0.0; double tauMax = 1.0;  double dTau = (tauMax-tauMin)/N;
+        double tau = tauMin;
+
+        for(int i = 0; i< N; i++) {
+            ksis.add(ksi);
+            taus.add(tau);
+            System.out.println(ksi+"   "+tau+ "    "+ conveyor.speedLaw(ksi).applyAsDouble(tau));
+            ksi += conveyor.speedLaw(ksi).applyAsDouble(tau)*dTau;
+            tau+=dTau;
+
+            number.add(i*1.0);
+        }
+
+        CsvWriterP p = new CsvWriterP("  %8.3f   ",';',"src\\test\\java\\magistral","ksi_tau02.csv");
+        Locale.setDefault(new Locale("en", "US"));
+        p.setHeader("     tau     ","     ksi     ","     number");
+        p.writeToFile(ksis,taus,number );
+        p.getLocaleCurrent();
+    }
+
+
+
+    @Test
+    public void  getBoundaryСonditionsWriteToFileCsvTest() throws IOException {
+
+        List<Double> ksis = new ArrayList<>();
+        List<Double> boundaryСonditions = new ArrayList<>();
+        List<Double> number = new ArrayList<>();
+        Integer N = 1000;
+        double dksi = 1.0/ N;
+
+        for(int i = 0; i< N; i++) {
+            System.out.println(i * dksi+"   "+ conveyor.getBoundaryСonditions(i*dksi));
+            ksis.add(i * dksi); boundaryСonditions.add(conveyor.getBoundaryСonditions(i*dksi));
+            number.add(i*1.0);
+        }
+
+        CsvWriterP p = new CsvWriterP("  %8.3f   ",';',"src\\test\\java\\magistral","psi_ksi.csv");
+        Locale.setDefault(new Locale("en", "US"));
+        p.setHeader("     ksi     ","     psi     ","     number");
+        p.writeToFile(ksis,boundaryСonditions,number );
+        p.getLocaleCurrent();
+    }
+
+    /**
+     *
+     * @throws IOException
+     */
+    @Test
+    public void getBoundaryСonditionsConstV1WriteToFileCsvTest() throws IOException {
+        Locale.setDefault(new Locale("ru", "RY"));
+        List<Double> ksis = new ArrayList<>();
+        List<Double> boundaryСonditions = new ArrayList<>();
+        List<Double> number = new ArrayList<>();
+
+        conveyor.setBoundaryСonditions(new ArrayList<ToDoubleFunction>() {
+            { add(ksi-> 0.00);add(ksi-> 1.00);add(ksi-> 0.75);add(ksi-> 0.75);add(ksi-> 0.50);add(ksi-> 0.25);}
+        });
+
+        for(int i = 0; i< N; i++) {
+            System.out.println(i * dksi+"   "+ conveyor.getBoundaryСonditions(i*dksi));
+            ksis.add(i * dksi); boundaryСonditions.add(conveyor.getBoundaryСonditions(i*dksi));
+            number.add(i*1.0);
+        }
+
+        CsvWriterP p = new CsvWriterP("  %8.3f   ",';',"src\\test\\java\\magistral","psi_ksiV1.csv");
+        Locale.setDefault(new Locale("en", "US"));
+        p.setHeader("     ksi     ","     psi     ","     number");
+        p.writeToFile(ksis,boundaryСonditions,number );
+        p.getLocaleCurrent();
+    }
+
+    @Test
+    public void speedLawTest() {
+        assertEquals("Unexpected double value", 0.5, conveyor.speedLaw(0.36).applyAsDouble(0.0), 0.001);
+        assertEquals("Unexpected double value", 2.0, conveyor.speedLaw(0.99).applyAsDouble(1.0), 0.001);
+        assertEquals("Unexpected double value", 0.0, conveyor.speedLaw(1.0).applyAsDouble(1.0), 0.001);
+    }
+
+    @Test
+    public void getTetaWriteToFileCsvTest() throws IOException {
+
+
+        double tau ;
+        double dTau = 0.25;
+
+        for (Integer t =0 ; t<4; t++) {
+
+            Locale.setDefault(new Locale("ru", "RY"));
+            List<Double> ksis = new ArrayList<>();
+            List<Double> tetas = new ArrayList<>();
+            List<Double> number = new ArrayList<>();
+
+
+            tau = t*dTau;
+
+            for (int i = 0; i < N; i++) {
+                System.out.println(i * dksi + "   " + conveyor.getTeta(tau, i * dksi));
+                ksis.add(i * dksi);
+                tetas.add(conveyor.getTeta(tau, i * dksi));
+                number.add(i * 1.0);
+            }
+
+            CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', "src\\test\\java\\magistral", "teta_ksi"+t.toString()+".csv");
+            Locale.setDefault(new Locale("en", "US"));
+            p.setHeader("     ksi     ", "     teta    ", "     number");
+            p.writeToFile(ksis, tetas, number);
+            p.getLocaleCurrent();
+
+
+        }
+
+    }
+
+    @Test
+    public void getTetavTest() throws IOException {
+
+        Double result = conveyor.getTeta(0.02,0.0);
+        System.out.println(result);
+
+
+        }
+
+    }
+
+
+
 
 
