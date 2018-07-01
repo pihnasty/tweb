@@ -42,7 +42,7 @@ public class Conveyor {
     public static Conveyor getDefaultConveyor() {
         Conveyor conveyor = new Conveyor();
         conveyor.addSection(new Section("0", 0.00, tau -> 0.00, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 1.0, true)))
-                .addSection(new Section("1", 0.2, tau -> 1.0, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 1.1, true)))
+                .addSection(new Section("1", 0.2, tau -> 1.0, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 0.4, true)))
                 .addSection(new Section("2", 0.50 , tau -> 0.50, ksi -> 0.50+0.5*Math.sin ( 2.0*3.14*(double) ksi ),  new Bunker(tau -> 1.2, true)))
                 //     .addSection(new Section("3", 0.70 , tau -> 1.50, ksi -> 0.50+0.5*Math.sin ( 2.0*3.14*(double) ksi ),  new Bunker(tau -> 1.3, true)))
                 //    .addSection(new Section("4", 0.80 , tau -> 0.50, ksi -> 0.50+0.5*Math.sin ( 2.0*3.14*(double) ksi ),  new Bunker(tau -> 1.4, true)))
@@ -80,7 +80,7 @@ public class Conveyor {
 
     public Double getTeta(Double tau, Double ksi) {
         Double result = 0.0;
-        CashList cash = getGlist(0.0,0.01);
+        CashList cash = getGlist(0.0,0.001);
       //  tau=tau+0.1;
 
         double r= F.rG(ksi,tau,0, cash);
@@ -89,24 +89,36 @@ public class Conveyor {
         double tau_ksi_m = 0.0;
 
         /*      First section                */
-        tau_ksi_m = F.Gminus(ksi(0) + F.G(tau, cash) - ksi, cash);
-        result += ( F.H(ksi - ksi(0)) - F.H(r - ksi(0))) * gamma(0, tau_ksi_m) / g(1, tau_ksi_m);
+//        tau_ksi_m = F.Gminus(ksi(0) + F.G(tau, cash) - ksi, cash);
+ //       result += ( F.H(ksi - ksi(0)) - F.H(r - ksi(0))) * gamma(0, tau_ksi_m) / g(1, tau_ksi_m);
 //        result += ( F.H(r - ksi(0))) * getBoundaryСonditions( r );
 
         /*      Another sections                */
 
-        for (int m = 1; m < sections.size() - 2; m++) {
-            r=F.rG(ksi ,tau +0.1,0.1, cash);
-            tau_ksi_m = F.Gminus(ksi(m) + F.G(tau +0.1, cash) - ksi, cash);
-            double tau_ksi_m_1 = F.Gminus(ksi(m-1) + F.G(tau, cash) - ksi, cash);
-            result += (F.H(ksi - ksi(m)) - F.H(r - ksi(m))) * gamma(m, tau_ksi_m) / g(m + 1, tau_ksi_m);
+        for (int m = 0; m < sections.size() - 2; m++) {
+            r=F.rG(ksi ,tau ,0, cash);
+            tau_ksi_m = F.Gminus(ksi(m) + F.G(tau , cash) - ksi, cash);
+//            double tau_ksi_m_1 = F.Gminus(ksi(m-1) + F.G(tau, cash) - ksi, cash);
 
-            result -= (F.H(ksi - ksi(m)) - F.H(r - ksi(m))) * gamma(m-1, tau_ksi_m_1) / g(m , tau_ksi_m_1);
+            result += (
+                     (F.H(ksi - ksi(m)) - F.H(ksi - ksi(m+1)))
+                    -(F.H(r - ksi(m)) - F.H(r - ksi(m+1)))
+            )  * gamma(m, tau_ksi_m) / g(m + 1, tau_ksi_m);
+
+             result -= (
+                          F.H(ksi - ksi(m))
+                        - F.H(r - ksi(m))
+             )*getBoundaryСonditions( r );
+
+
+//            result += (F.H(ksi - ksi(m)) - F.H(r - ksi(m))) * gamma(m, tau_ksi_m) / g(m + 1, tau_ksi_m);
+//
+//            result -= (F.H(ksi - ksi(m)) - F.H(r - ksi(m))) * gamma(m-1, tau_ksi_m_1) / g(m , tau_ksi_m_1);
   //          result +=  ( F.H(r - ksi(m))) * getBoundaryСonditions( r );
 
         }
 
-      //  result += getBoundaryСonditions( r );
+       result += getBoundaryСonditions( r );
 
 
         return result;
