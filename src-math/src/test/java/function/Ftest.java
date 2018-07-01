@@ -20,15 +20,17 @@ public class Ftest {
 
    @Test
     public void GminusTest() {
-      double result = F.Gminus(6.25,tau -> tau*tau,  new CashList());
+      double result = F.Gminus(6.25, new CashList());
       assertEquals("Unexpected double value", 2.5, result,0.0001);
    }
 
    @Test
     public void GTest () {
+
+
        CashList cash = new CashList(0.0001);
        assertEquals("Unexpected double value", 12.5,
-               F.G(5.0,  tau -> tau, cash ),0.001);
+               F.G(5.0,  cash ),0.001);
 
 
 //       double result = F.Gminus(25.0,  tau -> tau*tau,  cash);
