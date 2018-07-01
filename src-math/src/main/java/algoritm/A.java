@@ -26,6 +26,7 @@ public class A {
             }
             indexTemp = (indexMax + indexMin) / 2;
         }
+        if (indexTemp==0 || indexTemp==list.size()) throw new IllegalArgumentException("indexTemp="+indexTemp+" key="+list.get(indexTemp).getKey());
         return list.get(indexTemp).getKey();
     }
 

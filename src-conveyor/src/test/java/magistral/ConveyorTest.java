@@ -206,7 +206,7 @@ public class ConveyorTest {
         double tau ;
         double dTau = 0.05;
 
-        for (Integer t =0 ; t<10; t++) {
+        for (Integer t =0 ; t<15; t++) {
 
             Locale.setDefault(new Locale("ru", "RY"));
             List<Double> ksis = new ArrayList<>();
@@ -245,8 +245,21 @@ public class ConveyorTest {
     @Test
     public void GTest() {
         CashList cash = conveyor.getGlist(0.0, 0.00001);
-        assertEquals("Unexpected double value", 0.75, F.G(0.6, cash), 0.001);
-        assertEquals("Unexpected double value", 0.6, F.Gminus(0.75, cash), 0.001);
+
+        assertEquals("Unexpected double value", 0.75, F.G(-0.6, cash), 0.001);
+
+//        assertEquals("Unexpected double value", 0.75, F.G(0.6, cash), 0.001);
+//        assertEquals("Unexpected double value", 0.6, F.Gminus(0.75, cash), 0.001);
+    }
+
+    @Test
+    public void GminusTest() {
+        CashList cash = conveyor.getGlist(0.0, 0.00001);
+
+        assertEquals("Unexpected double value", 0.75, F.Gminus(-0.6, cash), 0.001);
+
+//        assertEquals("Unexpected double value", 0.75, F.G(0.6, cash), 0.001);
+//        assertEquals("Unexpected double value", 0.6, F.Gminus(0.75, cash), 0.001);
     }
 }
 
