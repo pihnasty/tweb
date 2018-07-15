@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 public class ConveyorTest {
 
 //------------------------------------------------------------------------------------------
-    Integer N = 10000;   // number of partitions for a technological route
+    Integer N = 20000;   // number of partitions for a technological route
     double dksi = 1.0/ N;
 //------------------------------------------------------------------------------------------
 
@@ -91,7 +91,7 @@ public class ConveyorTest {
         Integer N = 1000;
 
         double ksi = 0.0;
-        double tauMin = 0.0; double tauMax = 1.0;  double dTau = (tauMax-tauMin)/N;
+        double tauMin = 0.0; double tauMax = 2.0;  double dTau = (tauMax-tauMin)/N;
         double tau = tauMin;
 
         for(int i = 0; i< N; i++) {
@@ -204,9 +204,9 @@ public class ConveyorTest {
 
 
         double tau ;
-        double dTau = 0.05;
+        double dTau = 0.025;
 
-        for (Integer t =0 ; t<15; t++) {
+        for (Integer t =0 ; t<35; t++) {
 
             Locale.setDefault(new Locale("ru", "RY"));
             List<Double> ksis = new ArrayList<>();
