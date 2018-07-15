@@ -24,7 +24,7 @@ public class ConveyorTest {
     Conveyor conveyor = Conveyor.getDefaultConveyor();
     @Test
     public void getDefaultConveyorTest(){
-        conveyor.sections.forEach(section ->
+        conveyor.getSections().forEach(section ->
                 System.out.println("name="+section.getName()+" ChildNodes "
                         + (!section.getChildNodes().isEmpty() ?  section.getChildNodes().get(0).getName(): "  ")
                         +" ParentsNodes "

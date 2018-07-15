@@ -15,7 +15,9 @@ import static function.F.H;
 
 public class Conveyor {
 
-    List<Section> sections = new ArrayList<>();
+    private List<Section> sections = new ArrayList<>();
+    private List<CashList> cashs = getCashForG(0.00001);
+
 
     public Conveyor addSection (Section section) {
         sections.add(section);
@@ -60,7 +62,7 @@ public class Conveyor {
         for (int i = conveyor.sections.size() - 2; i >= 0; i--) {
             conveyor.sections.get(i).getChildNodes().add(conveyor.sections.get(i + 1));
         }
-
+        conveyor.cashs = conveyor.getCashForG(0.001);
         return conveyor;
     }
 
@@ -80,10 +82,6 @@ public class Conveyor {
 
     public Double getTeta(Double tau, Double ksi) {
         Double result = 0.0;
-        List<CashList> cashs = getCashForG(0.001);
-        //  tau=tau+0.1;
-
-        double tau_ksi_m = 0.0;
 
         /*      First section                */
 //        tau_ksi_m = F.Gminus(ksi(0) + F.G(tau, cash) - ksi, cash);
@@ -93,30 +91,72 @@ public class Conveyor {
         /*      Another sections                */
 
         for (int m = 0; m < sections.size() - 2; m++) {
-            double r=F.rG(ksi ,tau ,0, cashs.get(m));
-              tau_ksi_m = F.Gminus(ksi(m) + F.G(tau , cashs.get(m)) - ksi, cashs.get(m));
+            double r=rG(ksi ,tau ,m);
+            double tau_ksi_m  = Gminus(ksi ,tau ,m);
+
+
             result += (
                     (F.H(ksi - ksi(m)) - F.H(ksi - ksi(m+1)))
                             -(F.H(r - ksi(m)) - F.H(r - ksi(m+1)))
-            )  * gamma(m, tau_ksi_m) / g(m + 1, tau_ksi_m);
+            )  *  gamma(m, tau_ksi_m) / g(m + 1, tau_ksi_m);
+/*
+            result += (
+                    (F.H(r - ksi(m)) - F.H(r - ksi(m+1)))
+                          - (F.H(r - ksi(m+1)) - F.H(ksi - ksi(m+1)))
 
-            result -= (
-                    F.H(ksi - ksi(m))
-                            - F.H(r - ksi(m))
-            )*getBoundaryСonditions( r );
+            )  *sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
+*/
 
-            result +=
-                    (H(r - ksi(m))
-                            - H(r - ksi(m+1)))
-                            * sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
+            result += (
+                    (F.H(r - ksi(m)) - F.H(r - ksi(m+1)))
+                          * (F.H(ksi - ksi(m)) - F.H(ksi - ksi(m+1)))
 
+            )  *sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
+
+/*
+            if  (F.H(ksi - ksi(m)) - F.H(ksi - ksi(m+1))>0)
+            result += (
+                    (F.H(r - ksi(m)) - F.H(r - ksi(m+1)))
+                         //  -   (F.H(ksi- ksi(m)) - F.H(r - ksi(m)))
+            )  *sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
+
+*/
+
+
+//            result += (
+//                    (F.H(ksi - ksi(m)) - F.H(ksi - ksi(m+1)))
+//                            -(F.H(r - ksi(m)) - F.H(r - ksi(m+1)))
+//            )  *sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
+
+//            result += (
+//                    F.H(r - ksi(m)) -  F.H(r - ksi(m+1))
+//                    )*sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
+//
+//
+//            result -= (
+//                    F.H(ksi - ksi(m))
+//                            - F.H(r - ksi(m))
+//            )*getBoundaryСonditions( r );
+//
+//            result +=
+//                    (H(r - ksi(m))
+//                            - H(r - ksi(m+1)))
+//                            * sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
+       //     result += getBoundaryСonditions( r );
         }
 
-//        result += getBoundaryСonditions( r );
+
 
         return result;
     }
 
+    private double rG(double ksi , double tau, int m ) {
+        return F.rG(ksi ,tau ,0, cashs.get(m));
+    }
+
+    private double Gminus(double ksi , double tau, int m ) {
+    return F.Gminus(ksi(m) + F.G(tau , cashs.get(m)) - ksi, cashs.get(m));
+    }
 
 //    public Double getTeta2(Double tau, Double ksi) {
 //        Double result = 0.0;
@@ -170,7 +210,8 @@ public class Conveyor {
     }
 
     private double gamma (int m, double tau) {
-        return  F.H(tau)*sections.get(m).getBunker().getGamma().applyAsDouble(tau);
+        return  F.H(tau)*
+                sections.get(m).getBunker().getGamma().applyAsDouble(tau);
     }
 
     private double g (int m, double tau) {

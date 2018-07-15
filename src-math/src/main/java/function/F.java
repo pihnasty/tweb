@@ -30,7 +30,7 @@ public class F {
 
 
     public static double rG(double xi, double tau, double tauStart, CashList cash) {
-        return xi -  G(tau,cash)+G( tauStart,cash);
+        return xi -  G(tau,cash);
     }
 
     public static double Gminus(double G, CashList  cash) {
