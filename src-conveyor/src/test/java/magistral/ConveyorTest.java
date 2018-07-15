@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 public class ConveyorTest {
 
 //------------------------------------------------------------------------------------------
-    Integer N = 1000;
+    Integer N = 10000;   // number of partitions for a technological route
     double dksi = 1.0/ N;
 //------------------------------------------------------------------------------------------
 
