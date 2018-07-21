@@ -7,7 +7,12 @@ import write.CsvWriterP;
 import write.PrintWriterP;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.ToDoubleFunction;
@@ -17,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 public class ConveyorTest {
 
 //------------------------------------------------------------------------------------------
-    Integer N = 20000;   // number of partitions for a technological route
+    Integer N = 1000;   // number of partitions for a technological route
     double dksi = 1.0/ N;
 //------------------------------------------------------------------------------------------
 
@@ -201,37 +206,72 @@ public class ConveyorTest {
 
     @Test
     public void getTetaWriteToFileCsvTest() throws IOException {
-
-
-        double tau ;
+        String path = "src\\test\\java\\magistral\\"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(new Date());
+        Files.createDirectories(Paths.get(path));
+        double tau;
         double dTau = 0.025;
 
-        for (Integer t =0 ; t<35; t++) {
-
+        for (Integer t = 0; t < 35; t++) {
             Locale.setDefault(new Locale("ru", "RY"));
             List<Double> ksis = new ArrayList<>();
             List<Double> tetas = new ArrayList<>();
             List<Double> number = new ArrayList<>();
-
-
-            tau = t*dTau;
-
+            tau = t * dTau;
             for (int i = 0; i < N; i++) {
                 System.out.println(i * dksi + "   " + conveyor.getTeta(tau, i * dksi));
                 ksis.add(i * dksi);
                 tetas.add(conveyor.getTeta(tau, i * dksi));
                 number.add(i * 1.0);
             }
-
-            CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', "src\\test\\java\\magistral", "teta_ksi"+t.toString()+".csv");
+            CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', path, "teta_ksi" + t.toString() + ".csv");
             Locale.setDefault(new Locale("en", "US"));
             p.setHeader("     ksi     ", "     teta    ", "     number");
             p.writeToFile(ksis, tetas, number);
             p.getLocaleCurrent();
-
-
         }
+    }
 
+    @Test
+    public void getTetaWriteToFileCsvTest(List<Section> sections, double precision, int variantDecision) throws IOException {
+        conveyor = new Conveyor(sections,precision);
+        getTetaWriteToFileCsvTest(variantDecision);
+    }
+
+    /**
+     *
+     * @param variant
+     * @throws IOException
+     */
+    @Test
+    public void getTetaWriteToFileCsvTest(int variant) throws IOException {
+        String path = "src\\test\\java\\magistral\\"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(new Date());
+        Files.createDirectories(Paths.get(path));
+        double tau;
+        double dTau = 0.025;
+
+        for (Integer t = 0; t < 35; t++) {
+            Locale.setDefault(new Locale("ru", "RY"));
+            List<Double> ksis = new ArrayList<>();
+            List<Double> tetas = new ArrayList<>();
+            List<Double> number = new ArrayList<>();
+            tau = t * dTau;
+            for (int i = 0; i < N; i++) {
+                if (variant == 0) {
+                    System.out.println(i * dksi + "   " + conveyor.getTeta(tau, i * dksi));
+                    tetas.add(conveyor.getTeta(tau, i * dksi));
+                } else {
+                    System.out.println(i * dksi + "   " + conveyor.getTeta(tau, i * dksi, variant));
+                    tetas.add(conveyor.getTeta(tau, i * dksi, variant));
+                }
+                ksis.add(i * dksi);
+                number.add(i * 1.0);
+            }
+            CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', path, "teta_ksi" + t.toString() + ".csv");
+            Locale.setDefault(new Locale("en", "US"));
+            p.setHeader("     ksi     ", "     teta    ", "     number");
+            p.writeToFile(ksis, tetas, number);
+            p.getLocaleCurrent();
+        }
     }
 
     @Test
@@ -240,6 +280,10 @@ public class ConveyorTest {
         Double result = conveyor.getTeta(0.02,0.0);
         System.out.println(result);
         }
+
+
+
+
 
 
     @Test

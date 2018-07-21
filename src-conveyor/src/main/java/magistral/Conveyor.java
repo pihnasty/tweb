@@ -19,6 +19,24 @@ public class Conveyor {
     private List<Section> sections = new ArrayList<>();
     private List<CashList> cashs = getCashForG(0.00001);
 
+    public Conveyor() {
+
+    }
+
+    public Conveyor (List<Section> sections, double precision) {
+        sections.forEach(section -> addSection(section));
+        for (int i = 1; i < sections.size(); i++) {
+                    sections
+                    .get(i)
+                    .getParentNodes()
+                    .add(sections.get(i - 1));
+        }
+
+        for (int i = sections.size() - 2; i >= 0; i--) {
+            sections.get(i).getChildNodes().add(sections.get(i + 1));
+        }
+        cashs = getCashForG(precision);
+    }
 
     public Conveyor addSection (Section section) {
         sections.add(section);
@@ -44,6 +62,7 @@ public class Conveyor {
 
     public static Conveyor getDefaultConveyor() {
         Conveyor conveyor = new Conveyor();
+
         conveyor.addSection(new Section("0", 0.00, tau -> 0.00, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 1.0, true)))
                 .addSection(new Section("1", 0.20, tau -> 1.00, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 0.4, true)))
                 .addSection(new Section("2", 0.50, tau -> 0.50, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 1.2, true)))
@@ -93,29 +112,48 @@ public class Conveyor {
 
     public Double getTeta(Double tau, Double ksi) {
         Double result = 0.0;
-
         for (int m = 0; m < sections.size() - 2; m++) {
             double r = rG(ksi, tau, m);
             double tau_ksi_m = Gminus(ksi, tau, m);
+//--------------------------------------------------------------------------------------------------------------
             result += (
                     (F.H(ksi - ksi(m)) - F.H(r - ksi(m)))
             ) * gamma(m, tau_ksi_m) / g(m + 1, tau_ksi_m);
 
             result -= (
                     F.H(ksi - ksi(m + 1)) - F.H(r - ksi(m + 1))
-            ) * getNoPsiM(m , tau_ksi_m);
+            ) * getNoPsiM(m, tau_ksi_m);
+//--------------------------------------------------------------------------------------------------------------
+            result += (
+                    (F.H(r - ksi(m)) - F.H(r - ksi(m + 1)))
+            ) * sections.get(m + 1).getBoundaryСonditions().applyAsDouble(r);
 
+            result -= (F.H(ksi - ksi(m + 1)) - F.H(r - ksi(m + 1)))
+                    * (F.H(r - ksi(m)) - F.H(r - ksi(m + 1))
+            ) * sections.get(m + 1).getBoundaryСonditions().applyAsDouble(r);
+        }
+        return result;
+    }
 
-
+    public Double getTeta(Double tau, Double ksi, int right) {
+        Double result = 0.0;
+        for (int m = 0; m < sections.size() - 2; m++) {
+            double r = rG(ksi, tau, m);
+            double tau_ksi_m = Gminus(ksi, tau, m);
+//--------------------------------------------------------------------------------------------------------------
+            result += (
+                    (F.H(ksi - ksi(m)) - F.H(r - ksi(m)))
+                            * (F.H(ksi - ksi(m)) - F.H(ksi - ksi(m+1)))
+            ) * gamma(m, tau_ksi_m) / g(m + 1, tau_ksi_m);
+//--------------------------------------------------------------------------------------------------------------
             result += (
                     (F.H(r - ksi(m)) - F.H(r - ksi(m+1)))
                             * (F.H(ksi - ksi(m)) - F.H(ksi - ksi(m+1)))
             ) *sections.get(m+1).getBoundaryСonditions().applyAsDouble(r);
-
-
         }
         return result;
     }
+
 
     private double getPsiM (int m, Double tau) {
         Double result = 0.0;
@@ -127,10 +165,8 @@ public class Conveyor {
         return    gamma(m, tau) / g(m+1 , tau);
     }
 
-
     public Double getTeta2(Double tau, Double ksi) {
         Double result = 0.0;
-
         for (int m = 0; m < sections.size() - 2; m++) {
             double r=rG(ksi ,tau ,m);
             double tau_ksi_m  = Gminus(ksi ,tau ,m);
@@ -215,21 +251,21 @@ public class Conveyor {
             double tau = 0.0;
             double dTau = cash.getPrecision();
             double Gm = 0.0;
-            while (sections.get(m).getPosition() - sections.get(m - 1).getPosition() > 0.7* Gm) {
+            while (sections.get(m).getPosition() - sections.get(m - 1).getPosition() > 0.1* Gm) {
                 cash.add(new Pair<>(tau, Gm));
                 tau += dTau;
                 Gm += sections.get(m).getSpeed().applyAsDouble(tau) * dTau;
             }
 
 
-            tau = 0.0;
-            dTau = cash.getPrecision();
-            Gm = 0.0;
-            while (tau>=-1.0) {
-                tau -= dTau;
-                Gm -=  sections.get(m).getSpeed().applyAsDouble(tau) * dTau;
-                cash.add(new Pair<>(tau,Gm));
-            }
+//            tau = 0.0;
+//            dTau = cash.getPrecision();
+//            Gm = 0.0;
+//            while (tau>=-1.0) {
+//                tau -= dTau;
+//                Gm -=  sections.get(m).getSpeed().applyAsDouble(tau) * dTau;
+//                cash.add(new Pair<>(tau,Gm));
+//            }
             cash.sort(Comparator.comparingDouble(Pair::getKey));
 
 
