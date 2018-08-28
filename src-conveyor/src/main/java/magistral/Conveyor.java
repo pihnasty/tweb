@@ -97,7 +97,7 @@ public class Conveyor {
     }
 
     public Double getSpeed(Double tau, Double ksi) {
-        return speedLaw (ksi).applyAsDouble(tau);
+        return speedLaw (ksi).applyAsDouble(tau)>0? speedLaw (ksi).applyAsDouble(tau):0;
     }
 
     public Double getBoundaryСonditions(Double ksi) {
@@ -255,17 +255,18 @@ public class Conveyor {
                 cash.add(new Pair<>(tau, Gm));
                 tau += dTau;
                 Gm += sections.get(m).getSpeed().applyAsDouble(tau) * dTau;
+                if (sections.get(m).getSpeed().applyAsDouble(tau) < 0) break;
             }
 
 
-//            tau = 0.0;
-//            dTau = cash.getPrecision();
-//            Gm = 0.0;
-//            while (tau>=-1.0) {
-//                tau -= dTau;
-//                Gm -=  sections.get(m).getSpeed().applyAsDouble(tau) * dTau;
-//                cash.add(new Pair<>(tau,Gm));
-//            }
+            tau = 0.0;
+            dTau = cash.getPrecision();
+            Gm = 0.0;
+            while (tau>=-cash.getPrecision()*2.0) {
+                tau -= dTau;
+                Gm -=  sections.get(m).getSpeed().applyAsDouble(tau) * dTau;
+                cash.add(new Pair<>(tau,Gm));
+            }
             cash.sort(Comparator.comparingDouble(Pair::getKey));
 
 

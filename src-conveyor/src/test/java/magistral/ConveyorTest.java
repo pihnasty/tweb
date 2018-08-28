@@ -48,41 +48,83 @@ public class ConveyorTest {
     }
 
     @Test
-    public void  getSpeedWriteToFilePrintTest() {
-
+    public void  getSpeedWriteToFilePrintTest() throws IOException {
+        String path = "src\\test\\java\\magistral\\"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(new Date());
+        Files.createDirectories(Paths.get(path));
         List<Double> ksis = new ArrayList<>();
         List<Double> gs = new ArrayList<>();
         List<Double> number = new ArrayList<>();
 
         Integer N = 100;
-        gmFromKsi(ksis, gs, number, N);
+        gmFromKsi(0,ksis, gs, number, N);
 
-        PrintWriterP printWriterP = new PrintWriterP("  %8.3f   ", "src\\test\\java\\magistral", "test3.txt");
+        PrintWriterP printWriterP = new PrintWriterP("  %8.3f   ", path, "speed_ksi.txt");
         Locale.setDefault(new Locale("en", "US"));
         printWriterP.writeToFile(number,ksis,gs);
         Locale.setDefault(new Locale("ru", "RU"));
     }
 
     @Test
-    public void  getSpeedWriteToFileCsvTest() throws IOException {
+    public void  getSpeedWriteToFileCsvTest( int variant) throws IOException {
+        String path = "src\\test\\java\\magistral\\"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(new Date());
+        Files.createDirectories(Paths.get(path));
+        double tau;
+        double dTau = 0.025;
+       if (variant == 0) {
+           for (Integer t = 0; t < 35; t++) {
+               List<Double> ksis = new ArrayList<>();
+               List<Double> gs = new ArrayList<>();
+               List<Double> number = new ArrayList<>();
+               tau = t * dTau;
+               gmFromKsi(tau, ksis, gs, number, N);
 
-        List<Double> ksis = new ArrayList<>();
-        List<Double> gs = new ArrayList<>();
-        List<Double> number = new ArrayList<>();
-        Integer N = 1000;
-        gmFromKsi(ksis, gs, number, N);
-        CsvWriterP p = new CsvWriterP("  %8.3f   ",';',"src\\test\\java\\magistral","gm_ksi.csv");
-        Locale.setDefault(new Locale("en", "US"));
-        p.setHeader("     ksi     ","     gm      ","     number");
-        p.writeToFile(ksis,gs,number );
-        p.getLocaleCurrent();
+               CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', path, "gm_ksi"+ t.toString() + ".csv");
+               Locale.setDefault(new Locale("en", "US"));
+               p.setHeader("     ksi     ", "     gm      ", "     number");
+               p.writeToFile(ksis, gs, number);
+               p.getLocaleCurrent();
+
+           }
+       }
+
+        if (variant == 1) {
+
+                for (Integer is=0; is<conveyor.getSections().size()-1; is++) {
+                    List<Double> taus = new ArrayList<>();
+                    List<Double> gs = new ArrayList<>();
+                    List<Double> number = new ArrayList<>();
+
+                    gmFromTau(conveyor.getSections().get(is).getPosition(), taus, gs, number, N);
+
+                    CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', path, "gm_ksi" + is.toString() + ".csv");
+                    Locale.setDefault(new Locale("en", "US"));
+                    p.setHeader("     ksi     ", "     gm      ", "     number");
+                    p.writeToFile(taus, gs, number);
+                    p.getLocaleCurrent();
+                }
+        }
+
     }
 
-    private void gmFromKsi(List<Double> ksis, List<Double> gs, List<Double> number, Integer n) {
+    public void getSpeedWriteToFileCsvTest(List<Section> sections, double precision, int variant) throws IOException {
+        conveyor = new Conveyor(sections,precision);
+        getSpeedWriteToFileCsvTest( variant);
+    }
+
+    private void gmFromKsi(double tau, List<Double> ksis, List<Double> gs, List<Double> number, Integer n) {
         double dksi = 1.0/ n;
         for(int i = 0; i< n; i++) {
-            System.out.println(i * dksi+"   "+ conveyor.getSpeed(0.0, i * dksi));
-            ksis.add(i * dksi); gs.add(conveyor.getSpeed(0.0, i * dksi));
+            System.out.println(i * dksi+"   "+ conveyor.getSpeed(tau, i * dksi));
+            ksis.add(i * dksi); gs.add(conveyor.getSpeed(tau, i * dksi));
+            number.add(i*1.0);
+        }
+    }
+
+    private void gmFromTau(double ksi, List<Double> taus, List<Double> gs, List<Double> number, Integer n) {
+        double dtau = 1.0/ n;
+        for(int i = 0; i< n; i++) {
+            System.out.println(i * dtau+"   "+ conveyor.getSpeed(i * dtau, ksi));
+            taus.add(i * dtau); gs.add(conveyor.getSpeed(i * dtau, ksi));
             number.add(i*1.0);
         }
     }
@@ -206,29 +248,31 @@ public class ConveyorTest {
 
     @Test
     public void getTetaWriteToFileCsvTest() throws IOException {
-        String path = "src\\test\\java\\magistral\\"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(new Date());
-        Files.createDirectories(Paths.get(path));
-        double tau;
-        double dTau = 0.025;
+        throw new NullPointerException("getTetaWriteToFileCsvTest()");
 
-        for (Integer t = 0; t < 35; t++) {
-            Locale.setDefault(new Locale("ru", "RY"));
-            List<Double> ksis = new ArrayList<>();
-            List<Double> tetas = new ArrayList<>();
-            List<Double> number = new ArrayList<>();
-            tau = t * dTau;
-            for (int i = 0; i < N; i++) {
-                System.out.println(i * dksi + "   " + conveyor.getTeta(tau, i * dksi));
-                ksis.add(i * dksi);
-                tetas.add(conveyor.getTeta(tau, i * dksi));
-                number.add(i * 1.0);
-            }
-            CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', path, "teta_ksi" + t.toString() + ".csv");
-            Locale.setDefault(new Locale("en", "US"));
-            p.setHeader("     ksi     ", "     teta    ", "     number");
-            p.writeToFile(ksis, tetas, number);
-            p.getLocaleCurrent();
-        }
+//        String path = "src\\test\\java\\magistral\\"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(new Date());
+//        Files.createDirectories(Paths.get(path));
+//        double tau;
+//        double dTau = 0.025;
+//
+//        for (Integer t = 0; t < 35; t++) {
+//            Locale.setDefault(new Locale("ru", "RY"));
+//            List<Double> ksis = new ArrayList<>();
+//            List<Double> tetas = new ArrayList<>();
+//            List<Double> number = new ArrayList<>();
+//            tau = t * dTau;
+//            for (int i = 0; i < N; i++) {
+//                System.out.println(i * dksi + "   " + conveyor.getTeta(tau, i * dksi));
+//                ksis.add(i * dksi);
+//                tetas.add(conveyor.getTeta(tau, i * dksi));
+//                number.add(i * 1.0);
+//            }
+//            CsvWriterP p = new CsvWriterP("  %8.3f   ", ';', path, "teta_ksi" + t.toString() + ".csv");
+//            Locale.setDefault(new Locale("en", "US"));
+//            p.setHeader("     ksi     ", "     teta    ", "     number");
+//            p.writeToFile(ksis, tetas, number);
+//            p.getLocaleCurrent();
+//        }
     }
 
     @Test
