@@ -79,7 +79,7 @@ public class _2018_Article {
 //                new Section("After Section", 10.00, tau -> 0.00, ksi -> 0.0, new Bunker(tau -> 1.5, true))
 //        );
 
-        double a = 1.5;
+        double a = 0.25;
         List<Section> sections = Arrays.asList(
                 new Section("0", 0.00, tau -> 0.00, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 1.0, true)),
                 new Section("1", 0.20, tau -> 1.00 + a*(double) tau, ksi -> 0.50 + 0.5 * Math.sin(2.0 * 3.14 * (double) ksi), new Bunker(tau -> 0.4, true)),

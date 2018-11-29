@@ -13,6 +13,7 @@
         <module>src-math</module>
         <module>src-conveyor</module>
         <module>src-io</module>
+        <module>medicine</module>
     </modules>
 
     <packaging>pom</packaging>
