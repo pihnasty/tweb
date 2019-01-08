@@ -14,6 +14,7 @@
         <module>src-conveyor</module>
         <module>src-io</module>
         <module>medicine</module>
+        <module>med-analysis</module>
     </modules>
 
     <packaging>pom</packaging>

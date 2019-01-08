@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="med-analysis" />
         <module name="medicine" />
         <module name="src-conveyor" />
         <module name="src-io" />
@@ -16,6 +17,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="m5" target="1.8" />
+      <module name="med-analys" target="1.8" />
+      <module name="med-analysis" target="1.8" />
       <module name="medicine" target="1.8" />
       <module name="src-conveyor" target="1.8" />
       <module name="src-io" target="1.8" />
