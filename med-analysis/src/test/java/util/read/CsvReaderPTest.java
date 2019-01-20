@@ -59,8 +59,8 @@ public class CsvReaderPTest {
                                                                                                                                                                         ,"Defiection of nasal septum"
                 ,"Atopic dermatitis"
                                ,"Allergic rhinitis"
-                                               ," MedHist "      ," 23.1 BA "     ," 23.1 AR "    ," 23.2 BA "      ," 23.2 AR "     ," 23.4 BA "     ," Cm "           ," Pm "
-                ," E "         ," Hb "         ," Lk "           ," E% "          ," B% "         ," P% "           ," C% "          ," Ln% "         ," M% "           ," SOE "
+                                               ," MedHist "      ," 23.1 BA "     ," 23.1 AR "    ," 23.2 BA "      ," 23.2 AR "     ," 23.4 BA "     ," E "            ," Hb "
+                ," Lk "        ," E% "         ," B% "           ," P% "          ," C% "         ," Ln% "          ," M% "          ," SOE "         , " Cm "          ," Pm "
                 ," Wm "        ," Rm "         ," Lm "           ," ERm "         ," Slm "        ,"Loboda"         ,"Birch"         ,"Sagebrush"     ,"Sunflower"      ,"Timothy"
                 ,"Cocksfoot"   ,"Rye"          ,"Pyrei"          ,"Ryegrass"      ,"Alder"        ,"Fescue"         ,"Walnut"        ,"Linden"        ,"Plantain"       ,"Nettle"
                 ,"Dandelion"   ,"Cyclohena"    ,"Foxtail"        ,"Ragweed"       ,"Chestnut"     ,"Cypress"        ,"Maple"         ,"House dust "   ,"Feather pillows","Daphnia"
@@ -180,7 +180,7 @@ public class CsvReaderPTest {
         );
 
         // Check by summation of data transformation
-         controlExcel(headerWithFormat, tableWithHeader, sumD);
+//         controlExcel(headerWithFormat, tableWithHeader, sumD);
 
         for (int i =0; i<148; i++)
         System.out.println((i*i+i+1) +"  i="+ i);
